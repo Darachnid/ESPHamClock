@@ -3,6 +3,8 @@
 
 #include "HamClock.h"
 
+#ifndef MAP_ONLY
+
 #if defined(_CLOCK_1600x960)
 const uint16_t runner[HC_RUNNER_W*HC_RUNNER_H] PROGMEM = {
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
@@ -799,4 +801,10 @@ const uint16_t runner[HC_RUNNER_W*HC_RUNNER_H] PROGMEM = {
 0x0000, 0x0000, 0x0000, 0xffff, 0xffff, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 
 };
-#endif
+#endif // existing size options
+
+#else
+
+const uint16_t runner[1] PROGMEM = {0};
+
+#endif // MAP_ONLY

@@ -110,16 +110,19 @@ help:
 	@printf "    hamclock-1600x960         X11 GUI desktop version, larger, AKA hamclock-big\n"
 	@printf "    hamclock-2400x1440        X11 GUI desktop version, larger yet\n"
 	@printf "    hamclock-3200x1920        X11 GUI desktop version, huge\n"
+	@printf "    hamclock-3840x2160        X11 GUI desktop version, 4k map only\n"
 	@printf "\n";
 	@printf "    hamclock-web-800x480      web server only (no display)\n"
 	@printf "    hamclock-web-1600x960     web server only (no display), larger\n"
 	@printf "    hamclock-web-2400x1440    web server only (no display), larger yet\n"
 	@printf "    hamclock-web-3200x1920    web server only (no display), huge\n"
+	@printf "    hamclock-web-3840x2160    web server only (no display), 4k map only\n"
 	@printf "\n";
 	@printf "    hamclock-fb0-800x480      RPi stand-alone /dev/fb0, AKA hamclock-fb0-small\n"
 	@printf "    hamclock-fb0-1600x960     RPi stand-alone /dev/fb0, larger, AKA hamclock-fb0\n"
 	@printf "    hamclock-fb0-2400x1440    RPi stand-alone /dev/fb0, larger yet\n"
 	@printf "    hamclock-fb0-3200x1920    RPi stand-alone /dev/fb0, huge\n"
+	@printf "    hamclock-fb0-3840x2160    RPi stand-alone /dev/fb0, 4k map only\n"
 
 # remove old objects before building new ones to be sure the proper flags are used
 $(OBJS): clean
@@ -170,6 +173,14 @@ hamclock-3200x1920: $(OBJS)
 	$(CXX) $(LDXXFLAGS) $(OBJS) -o $@ $(LIBS)
 	rm -f UNIXHamClock.cpp
 
+hamclock-3840x2160: CXXFLAGS+=-D_USE_X11 -D_CLOCK_3840x2160 -DMAP_ONLY
+hamclock-3840x2160: LIBS+=-lX11
+hamclock-3840x2160: $(OBJS)
+	cd ArduinoLib && $(MAKE) libarduino.a "CXXFLAGS=$(CXXFLAGS)"
+	cd wsServer && $(MAKE) libws.a
+	$(CXX) $(LDXXFLAGS) $(OBJS) -o $@ $(LIBS)
+	rm -f UNIXHamClock.cpp
+
 
 
 
@@ -202,6 +213,13 @@ hamclock-web-2400x1440: $(OBJS)
 
 hamclock-web-3200x1920: CXXFLAGS+=-D_WEB_ONLY -D_CLOCK_3200x1920
 hamclock-web-3200x1920: $(OBJS)
+	cd ArduinoLib && $(MAKE) libarduino.a "CXXFLAGS=$(CXXFLAGS)"
+	cd wsServer && $(MAKE) libws.a
+	$(CXX) $(LDXXFLAGS) $(OBJS) -o $@ $(LIBS)
+	rm -f UNIXHamClock.cpp
+
+hamclock-web-3840x2160: CXXFLAGS+=-D_WEB_ONLY -D_CLOCK_3840x2160 -DMAP_ONLY
+hamclock-web-3840x2160: $(OBJS)
 	cd ArduinoLib && $(MAKE) libarduino.a "CXXFLAGS=$(CXXFLAGS)"
 	cd wsServer && $(MAKE) libws.a
 	$(CXX) $(LDXXFLAGS) $(OBJS) -o $@ $(LIBS)
@@ -247,6 +265,13 @@ hamclock-fb0-2400x1440: $(OBJS)
 
 hamclock-fb0-3200x1920: CXXFLAGS+=-D_USE_FB0 -D_CLOCK_3200x1920
 hamclock-fb0-3200x1920: $(OBJS)
+	cd ArduinoLib && $(MAKE) libarduino.a "CXXFLAGS=$(CXXFLAGS)"
+	cd wsServer && $(MAKE) libws.a
+	$(CXX) $(LDXXFLAGS) $(OBJS) -o $@ $(LIBS)
+	rm -f UNIXHamClock.cpp
+
+hamclock-fb0-3840x2160: CXXFLAGS+=-D_USE_FB0 -D_CLOCK_3840x2160 -DMAP_ONLY
+hamclock-fb0-3840x2160: $(OBJS)
 	cd ArduinoLib && $(MAKE) libarduino.a "CXXFLAGS=$(CXXFLAGS)"
 	cd wsServer && $(MAKE) libws.a
 	$(CXX) $(LDXXFLAGS) $(OBJS) -o $@ $(LIBS)

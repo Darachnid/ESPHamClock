@@ -228,8 +228,13 @@ class Adafruit_RA8875 {
 
 #elif defined(_CLOCK_3200x1920)
 
-	#define FB_XRES 3200
-	#define FB_YRES 1920
+        #define FB_XRES 3200
+        #define FB_YRES 1920
+
+#elif defined(_CLOCK_3840x2160)
+
+        #define FB_XRES 3840
+        #define FB_YRES 2160
 
 #else   // original size
 
