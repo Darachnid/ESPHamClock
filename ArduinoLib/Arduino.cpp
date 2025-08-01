@@ -39,6 +39,8 @@ const char *diag_files[N_DIAG_FILES] = {
       char our_make[] = "hamclock-fb0-2400x1440";
   #elif defined(_CLOCK_3200x1920)
       char our_make[] = "hamclock-fb0-3200x1920";
+  #elif defined(_CLOCK_3840x2160)
+      char our_make[] = "hamclock-fb0-3840x2160";
   #else
       char our_make[] = "hamclock-fb0-800x480";
   #endif
@@ -49,6 +51,8 @@ const char *diag_files[N_DIAG_FILES] = {
       char our_make[] = "hamclock-2400x1440";
   #elif defined(_CLOCK_3200x1920)
       char our_make[] = "hamclock-3200x1920";
+  #elif defined(_CLOCK_3840x2160)
+      char our_make[] = "hamclock-3840x2160";
   #else
       char our_make[] = "hamclock-800x480";
   #endif
@@ -59,6 +63,8 @@ const char *diag_files[N_DIAG_FILES] = {
       char our_make[] = "hamclock-web-2400x1440";
   #elif defined(_CLOCK_3200x1920)
       char our_make[] = "hamclock-web-3200x1920";
+  #elif defined(_CLOCK_3840x2160)
+      char our_make[] = "hamclock-web-3840x2160";
   #else
       char our_make[] = "hamclock-web-800x480";
   #endif

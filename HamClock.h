@@ -79,6 +79,17 @@
 #define BUILD_W 3200
 #define BUILD_H 1920
 
+#elif defined(_CLOCK_3840x2160)
+
+#define HC_MAP_W (660*5)
+#define HC_MAP_H (330*5)
+#define HC_MOON_W (148*5)
+#define HC_MOON_H (148*5)
+#define HC_RUNNER_W (13*5)
+#define HC_RUNNER_H (20*5)
+#define BUILD_W 3840
+#define BUILD_H 2160
+
 #else   // original size
 
 #define HC_MAP_W 660
@@ -90,6 +101,13 @@
 #define BUILD_W 800
 #define BUILD_H 480
 
+#endif
+
+#ifdef MAP_ONLY
+#undef HC_RUNNER_W
+#undef HC_RUNNER_H
+#define HC_RUNNER_W 1
+#define HC_RUNNER_H 1
 #endif
 
 // canonical map size 

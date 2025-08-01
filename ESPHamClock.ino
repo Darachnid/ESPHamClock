@@ -762,6 +762,17 @@ void drawOneTimeDX()
 void initScreen()
 {
 
+#ifdef MAP_ONLY
+    eraseScreen();
+    map_b.x = 0;
+    map_b.y = 0;
+    map_b.w = tft.width();
+    map_b.h = tft.height();
+    tft.setPR (map_b.x, map_b.y, map_b.w, map_b.h);
+    initEarthMap();
+    return;
+#endif
+
     // erase entire screen
     eraseScreen();
 

@@ -193,7 +193,11 @@ static void updateExistingClient (ws_cli_conn_t *client)
     // length of a region are in units of blocks, not pixels, to reduce each value's size to one byte
     // each in the header. smaller regions are more efficient but the coords must fit in 8 bit header value.
     #define BLOK_W      (BUILD_W>1600?16:8)             // pixels wide
+#if BUILD_H > 2040
+    #define BLOK_H      9                               // pixels high for 4k
+#else
     #define BLOK_H      8                               // pixels high
+#endif
     #define BLOK_NCOLS  (BUILD_W/BLOK_W)                // blocks in each row over entire image
     #define BLOK_NROWS  (BUILD_H/BLOK_H)                // blocks in each col over entire image
     #define BLOK_NPIX   (BLOK_W*BLOK_H)                 // size of 1 block, pixels
